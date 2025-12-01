@@ -5,6 +5,12 @@ package engine;
  * Used to calculate frame rate -> update() method is called once
  * every renderer frame (image).
  */
+
+
+/*
+Jukka Juslin 1.12.2025
+ */
+
 public class KuvaruudunPaivitysnopeudenLaskemiseenKaytettavaLuokka {
     private long edellisenPaivityksenAikaleimaMillisekunteina;
     private int kuluvanSekunninRuutukuvienLaskuri;

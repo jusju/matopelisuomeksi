@@ -3,6 +3,10 @@ package engine;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+/*
+Jukka Juslin 1.12.2025
+ */
+
 public class NappaimistonTilanSeurantaaJaKasittelyaVartenLuotuLuokka implements KeyListener {
     public static final int NAPPAYSTENKOKONAISMAARA_TAULUKOSSA = 256;
 

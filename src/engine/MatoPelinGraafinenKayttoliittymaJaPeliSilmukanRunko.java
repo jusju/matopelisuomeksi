@@ -31,6 +31,11 @@ import java.io.IOException;
  * edellisenPaivityksenNappainPainallusTila array. Why we should not call that method before processing input?
  * When should we even call it?
  */
+
+/*
+Jukka Juslin 1.12.2025
+ */
+
 public class MatoPelinGraafinenKayttoliittymaJaPeliSilmukanRunko extends JFrame implements Runnable {
 	public static final int IKKUNAN_LEVEYS_PIKSELEIN = 800;
 	public static final int IKKUNAN_KORKEUS_PIKSELEIN = 600;
@@ -126,7 +131,7 @@ public class MatoPelinGraafinenKayttoliittymaJaPeliSilmukanRunko extends JFrame 
 			// render to screen; we are really rendering to an offscreen buffer
 			// and then showing that on screen
 			viimeksiLaskettuRuutukuvienMaaraSekunnissa.update(); // this could be called in the render() method
-			render();
+			renderoi();
 		}
 	}
 
@@ -151,20 +156,20 @@ public class MatoPelinGraafinenKayttoliittymaJaPeliSilmukanRunko extends JFrame 
 		madonSegmenttienKoordinaatitTaulukko[2] = new PelialueenRuudukonKoordinaattiPiste(10, 10);
 
 		// create food
-		omenanSijaintiPeliruudukossa = generateFoodLocation();
+		omenanSijaintiPeliruudukossa = arvottuRuoanLokaatio();
 	}
 
-	private PelialueenRuudukonKoordinaattiPiste generateFoodLocation() {
+	private PelialueenRuudukonKoordinaattiPiste arvottuRuoanLokaatio() {
 		int ruudukonSarakeKoordinaatti;
 		int ruudukonRiviKoordinaatti;
 		do {
 			ruudukonSarakeKoordinaatti = (int) (Math.random() * PELIRUUDUKON_LEVEYS_RUUDUISSA);
 			ruudukonRiviKoordinaatti = (int) (Math.random() * PELIRUUDUKON_KORKEUS_RUUDUISSA);
-		} while (snakeCollidesWith(ruudukonSarakeKoordinaatti, ruudukonRiviKoordinaatti));
+		} while (kaarmeTormaaJohonkin(ruudukonSarakeKoordinaatti, ruudukonRiviKoordinaatti));
 		return new PelialueenRuudukonKoordinaattiPiste(ruudukonSarakeKoordinaatti, ruudukonRiviKoordinaatti);
 	}
 
-	private boolean snakeCollidesWith(int ruudukonSarakeKoordinaatti, int ruudukonRiviKoordinaatti) {
+	private boolean kaarmeTormaaJohonkin(int ruudukonSarakeKoordinaatti, int ruudukonRiviKoordinaatti) {
 		for (int silmukkaLisaIndeksiJokaOnPitkaNimi = 0; silmukkaLisaIndeksiJokaOnPitkaNimi < madonNykyinenPituusRuutuina; silmukkaLisaIndeksiJokaOnPitkaNimi++) {
 			if (madonSegmenttienKoordinaatitTaulukko[silmukkaLisaIndeksiJokaOnPitkaNimi].ruudukonSarakeKoordinaatti == ruudukonSarakeKoordinaatti && madonSegmenttienKoordinaatitTaulukko[silmukkaLisaIndeksiJokaOnPitkaNimi].ruudukonRiviKoordinaatti == ruudukonRiviKoordinaatti) {
 				return true;
@@ -173,7 +178,7 @@ public class MatoPelinGraafinenKayttoliittymaJaPeliSilmukanRunko extends JFrame 
 		return false;
 	}
 
-	private boolean snakeSelfCollision() {
+	private boolean kaarmeTormaaItseensa() {
 		for (int silmukkaLisaIndeksiJokaOnPitkaNimi = 1; silmukkaLisaIndeksiJokaOnPitkaNimi < madonNykyinenPituusRuutuina; silmukkaLisaIndeksiJokaOnPitkaNimi++) {
 			if (madonSegmenttienKoordinaatitTaulukko[silmukkaLisaIndeksiJokaOnPitkaNimi].ruudukonSarakeKoordinaatti == madonSegmenttienKoordinaatitTaulukko[0].ruudukonSarakeKoordinaatti && madonSegmenttienKoordinaatitTaulukko[silmukkaLisaIndeksiJokaOnPitkaNimi].ruudukonRiviKoordinaatti == madonSegmenttienKoordinaatitTaulukko[0].ruudukonRiviKoordinaatti) {
 				return true;
@@ -233,7 +238,7 @@ public class MatoPelinGraafinenKayttoliittymaJaPeliSilmukanRunko extends JFrame 
 				}
 
 				// check madonSegmenttienKoordinaatitTaulukko self collision
-				if (snakeSelfCollision()) {
+				if (kaarmeTormaaItseensa()) {
 					peliOnPaattynytTila = true;
 				}
 
@@ -253,8 +258,8 @@ public class MatoPelinGraafinenKayttoliittymaJaPeliSilmukanRunko extends JFrame 
 				} // wrap to top
 
 				// check collision with food
-				if (snakeCollidesWith(omenanSijaintiPeliruudukossa.ruudukonSarakeKoordinaatti, omenanSijaintiPeliruudukossa.ruudukonRiviKoordinaatti)) {
-					omenanSijaintiPeliruudukossa = generateFoodLocation();
+				if (kaarmeTormaaJohonkin(omenanSijaintiPeliruudukossa.ruudukonSarakeKoordinaatti, omenanSijaintiPeliruudukossa.ruudukonRiviKoordinaatti)) {
+					omenanSijaintiPeliruudukossa = arvottuRuoanLokaatio();
 					++madonNykyinenPituusRuutuina;
 					pelaajanNykyinenPisteSaldo += 10;
 				}
@@ -263,7 +268,7 @@ public class MatoPelinGraafinenKayttoliittymaJaPeliSilmukanRunko extends JFrame 
 		kuluvanHetkenNappainPainallusTila.update();
 	}
 
-	private void render() {
+	private void renderoi() {
 		Graphics piirtoGrafiikkaOlio = naytonPuskurointiStrategia.getDrawGraphics();
 
 		// ***** BEGIN DRAW *****
