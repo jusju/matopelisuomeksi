@@ -130,7 +130,7 @@ public class MatoPelinGraafinenKayttoliittymaJaPeliSilmukanRunko extends JFrame 
 			}
 			// render to screen; we are really rendering to an offscreen buffer
 			// and then showing that on screen
-			viimeksiLaskettuRuutukuvienMaaraSekunnissa.update(); // this could be called in the render() method
+			viimeksiLaskettuRuutukuvienMaaraSekunnissa.paivita(); // this could be called in the render() method
 			renderoi();
 		}
 	}
@@ -147,7 +147,7 @@ public class MatoPelinGraafinenKayttoliittymaJaPeliSilmukanRunko extends JFrame 
 
 		// create and init viimeksiLaskettuRuutukuvienMaaraSekunnissa counter
 		viimeksiLaskettuRuutukuvienMaaraSekunnissa = new KuvaruudunPaivitysnopeudenLaskemiseenKaytettavaLuokka();
-		viimeksiLaskettuRuutukuvienMaaraSekunnissa.init();
+		viimeksiLaskettuRuutukuvienMaaraSekunnissa.alusta();
 
 		// create madonSegmenttienKoordinaatitTaulukko
 		madonSegmenttienKoordinaatitTaulukko = new PelialueenRuudukonKoordinaattiPiste[MADON_MAKSIMIPITUUS_RUUDUISSA];
@@ -311,7 +311,7 @@ public class MatoPelinGraafinenKayttoliittymaJaPeliSilmukanRunko extends JFrame 
 		// draw viimeksiLaskettuRuutukuvienMaaraSekunnissa
 		piirtoGrafiikkaOlio.setColor(Color.WHITE);
 		piirtoGrafiikkaOlio.setFont(new Font("MonoSpaced", Font.BOLD, 18));
-		piirtoGrafiikkaOlio.drawString("FPS: " + viimeksiLaskettuRuutukuvienMaaraSekunnissa.getFPS(), 10, 20);
+		piirtoGrafiikkaOlio.drawString("FPS: " + viimeksiLaskettuRuutukuvienMaaraSekunnissa.haeFPS(), 10, 20);
 
 		// draw game over
 		piirtoGrafiikkaOlio.drawString("Game over: " + peliOnPaattynytTila, 220, RUUDUKON_YLA_REUNA_SIIRTO_Y - 8);

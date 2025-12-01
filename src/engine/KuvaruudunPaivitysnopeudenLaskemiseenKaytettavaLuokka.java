@@ -19,13 +19,13 @@ public class KuvaruudunPaivitysnopeudenLaskemiseenKaytettavaLuokka {
 
     public KuvaruudunPaivitysnopeudenLaskemiseenKaytettavaLuokka() { }
 
-    public void init() {
+    public void alusta() {
         edellisenPaivityksenAikaleimaMillisekunteina = System.currentTimeMillis();
     }
 
     // call this once every time the method whose frequency you want
     // to keep track of is called
-    public void update() {
+    public void paivita() {
         ++kuluvanSekunninRuutukuvienLaskuri;
         long nykyinenAikaleimaMillisekunteina = System.currentTimeMillis();
         kertyneidenMillisekuntienSumma += (nykyinenAikaleimaMillisekunteina - edellisenPaivityksenAikaleimaMillisekunteina);
@@ -37,7 +37,7 @@ public class KuvaruudunPaivitysnopeudenLaskemiseenKaytettavaLuokka {
         }
     }
 
-    public int getFPS() {
+    public int haeFPS() {
         return viimeksiLaskettuRuutukuvienMaaraSekunnissa;
     }
 }
