@@ -317,7 +317,7 @@ public class MatoPelinGraafinenKayttoliittymaJaPeliSilmukanRunko extends JFrame 
 			piirtoGrafiikkaOlio.setFont(new Font("MonoSpaced", Font.BOLD, 96));
 			piirtoGrafiikkaOlio.setColor(Color.RED);
 			String peliPaattynytTekstijono = "GAME OVER";
-			int peliPaattynytTekstinLeveysPikseleina = piirtoGrafiikkaOlio.getFontMetrics().peliPaattynytTekstinLeveysPikseleina(peliPaattynytTekstijono);
+			int peliPaattynytTekstinLeveysPikseleina = piirtoGrafiikkaOlio.getFontMetrics().stringWidth(peliPaattynytTekstijono);
 			piirtoGrafiikkaOlio.drawString(peliPaattynytTekstijono, (IKKUNAN_LEVEYS_PIKSELEIN - peliPaattynytTekstinLeveysPikseleina) / 2,
 					IKKUNAN_KORKEUS_PIKSELEIN / 2);
 		}
