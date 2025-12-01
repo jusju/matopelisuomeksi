@@ -19,7 +19,8 @@ public class NappaimistonTilanSeurantaaJaKasittelyaVartenLuotuLuokka implements 
     }
 
     public synchronized void update() {
-        for ( int silmukkaLisaIndeksiJokaOnPitkaNimi = 0; silmukkaLisaIndeksiJokaOnPitkaNimi < NAPPAYSTENKOKONAISMAARA_TAULUKOSSA; ++silmukkaLisaIndeksiJokaOnPitkaNimi ) {
+        for ( int silmukkaLisaIndeksiJokaOnPitkaNimi = 0; silmukkaLisaIndeksiJokaOnPitkaNimi < NAPPAYSTENKOKONAISMAARA_TAULUKOSSA; 
+                    ++silmukkaLisaIndeksiJokaOnPitkaNimi ) {
             edellisenPaivityksenNappainPainallusTila[silmukkaLisaIndeksiJokaOnPitkaNimi] = kuluvanHetkenNappainPainallusTila[silmukkaLisaIndeksiJokaOnPitkaNimi];
         }
     }
